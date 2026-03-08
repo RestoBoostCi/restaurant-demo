@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="fr">
 
+<html lang="fr">
 <head>
 
 <meta charset="UTF-8">
@@ -27,28 +27,32 @@ background-attachment:fixed;
 /* HEADER */
 
 header{
+
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:20px 40px;
-background:rgba(0,0,0,0.85);
-position:fixed;
-width:100%;
-top:0;
-z-index:1000;
-box-sizing:border-box;
-}
 
-header h2{
-margin:0;
+padding:15px 30px;
+
+background:rgba(0,0,0,0.85);
+
+position:fixed;
+top:0;
+width:100%;
+
+z-index:1000;
+
+box-sizing:border-box;
+
 }
 
 nav{
-display:flex;
-gap:25px;
-flex-wrap:wrap;
-}
 
+display:flex;
+gap:30px;
+flex-wrap:wrap;
+
+}
 nav a{
 color:white;
 text-decoration:none;
@@ -71,7 +75,7 @@ text-align:center;
 display:block;
 }
 
-/* ACCUEIL */
+/* TITRES */
 
 .hero h1{
 font-size:42px;
@@ -80,7 +84,6 @@ color:#d4af37;
 
 .hero p{
 font-size:20px;
-margin-bottom:25px;
 }
 
 /* BOUTONS */
@@ -88,7 +91,7 @@ margin-bottom:25px;
 .btn{
 background:#d4af37;
 color:black;
-padding:14px 25px;
+padding:12px 20px;
 border-radius:8px;
 font-weight:bold;
 cursor:pointer;
@@ -153,8 +156,60 @@ padding:20px;
 color:#d4af37;
 }
 
-.price{
-margin-bottom:15px;
+/* PANIER */
+
+.cart-button{
+
+position:fixed;
+top:120px;
+right:20px;
+
+background:#d4af37;
+color:black;
+
+padding:10px 16px;
+border-radius:8px;
+
+font-weight:bold;
+cursor:pointer;
+
+z-index:900;
+
+}
+
+.cart{
+
+position:fixed;
+
+right:20px;
+
+top:150px;
+
+background:#111;
+
+padding:20px;
+
+border-radius:12px;
+
+width:260px;
+
+display:none;
+
+z-index:2000;
+
+box-shadow:0 10px 30px rgba(0,0,0,0.7);
+
+}
+
+.cart-item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:10px;
+}
+
+.qty button{
+margin:0 4px;
 }
 
 /* CONTACT */
@@ -179,21 +234,6 @@ border-radius:50%;
 text-decoration:none;
 }
 
-/* MOBILE */
-
-@media (max-width:768px){
-
-header{
-flex-direction:column;
-gap:10px;
-}
-
-.hero h1{
-font-size:28px;
-}
-
-}
-
 </style>
 
 </head>
@@ -205,14 +245,16 @@ font-size:28px;
 <h2>Le Gourmet d'Abidjan</h2>
 
 <nav>
-
 <a onclick="showPage('home')">Accueil</a>
 <a onclick="showPage('menu')">Menu</a>
 <a onclick="showPage('contact')">Contact</a>
-
 </nav>
 
 </header>
+
+<div class="cart-button" onclick="toggleCart()">
+🛒 Panier (<span id="cartCount">0</span>)
+</div>
 
 <!-- ACCUEIL -->
 
@@ -223,10 +265,6 @@ font-size:28px;
 <h1>Restaurant Chic à Abidjan</h1>
 
 <p>Burgers gourmets • Grillades premium</p>
-
-<div class="btn" onclick="order('Commande générale')">
-Commander sur WhatsApp
-</div>
 
 <div class="btn" onclick="callServer()">
 Appeler un serveur
@@ -242,85 +280,42 @@ Appeler un serveur
 
 <div class="categories">
 
-<button onclick="showCategory('all')">Tout</button>
-<button onclick="showCategory('burger')">Burgers</button>
-<button onclick="showCategory('grill')">Grillades</button>
-<button onclick="showCategory('dessert')">Desserts</button>
+<button onclick="showCategory('all')">Tout</button> <button onclick="showCategory('burger')">Burgers</button> <button onclick="showCategory('grill')">Grillades</button> <button onclick="showCategory('dessert')">Desserts</button>
 
 </div>
 
 <div class="menu-container">
 
 <div class="card burger">
-
 <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd">
-
 <div class="card-content">
-
 <h3>Burger Gourmet</h3>
-
-<div class="price">6500 FCFA</div>
-
-<div class="btn" onclick="order('Burger Gourmet')">
-Commander
+<div class="btn" onclick="addToCart('Burger Gourmet')">Ajouter</div>
 </div>
-
-</div>
-
 </div>
 
 <div class="card grill">
-
 <img src="https://images.unsplash.com/photo-1544025162-d76694265947">
-
 <div class="card-content">
-
 <h3>Entrecôte grillée</h3>
-
-<div class="price">9000 FCFA</div>
-
-<div class="btn" onclick="order('Entrecôte grillée')">
-Commander
+<div class="btn" onclick="addToCart('Entrecôte grillée')">Ajouter</div>
 </div>
-
-</div>
-
 </div>
 
 <div class="card grill">
-
 <img src="https://images.unsplash.com/photo-1559847844-5315695dadae">
-
 <div class="card-content">
-
 <h3>Filet de poisson</h3>
-
-<div class="price">8000 FCFA</div>
-
-<div class="btn" onclick="order('Filet de poisson')">
-Commander
+<div class="btn" onclick="addToCart('Filet de poisson')">Ajouter</div>
 </div>
-
-</div>
-
 </div>
 
 <div class="card dessert">
-
 <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b">
-
 <div class="card-content">
-
 <h3>Cheesecake</h3>
-
-<div class="price">3500 FCFA</div>
-
-<div class="btn" onclick="order('Cheesecake')">
-Commander
+<div class="btn" onclick="addToCart('Cheesecake')">Ajouter</div>
 </div>
-
-</div>
-
 </div>
 
 </div>
@@ -336,16 +331,25 @@ Commander
 <div class="contact-box">
 
 <p>📍 Abidjan</p>
-
 <p>📱 WhatsApp : 0554901363</p>
-
-<p>⏰ Ouvert tous les jours : 12h - 23h</p>
 
 <div class="btn" onclick="callServer()">Appeler un serveur</div>
 
 </div>
 
 </section>
+
+<!-- PANIER -->
+
+<div id="cart" class="cart">
+
+<h3>Votre commande</h3>
+
+<div id="cartItems"></div>
+
+<button onclick="sendOrder()">Envoyer la commande</button>
+
+</div>
 
 <a href="https://wa.me/2250554901363" class="whatsapp">💬</a>
 
@@ -364,10 +368,8 @@ document.getElementById(page).classList.add("active");
 /* TABLE */
 
 function getTable(){
-
 const params=new URLSearchParams(window.location.search);
 return params.get("table");
-
 }
 
 window.onload=function(){
@@ -375,32 +377,121 @@ window.onload=function(){
 const table=getTable();
 
 if(table){
-
 showPage("menu");
-
 document.getElementById("tableNumber").innerText="Bienvenue - Table "+table;
+}
 
 }
+
+/* CATEGORIES */
+
+function showCategory(category){
+
+const items=document.querySelectorAll(".card");
+
+items.forEach(item=>{
+
+if(category==="all" || item.classList.contains(category)){
+item.style.display="block";
+}
+else{
+item.style.display="none";
+}
+
+});
+
+}
+
+/* PANIER */
+
+let cart={};
+
+function addToCart(item){
+
+if(cart[item]){
+cart[item]++;
+}
+else{
+cart[item]=1;
+}
+
+updateCart();
+
+}
+
+function updateCart(){
+
+const container=document.getElementById("cartItems");
+container.innerHTML="";
+
+let count=0;
+
+for(let item in cart){
+
+count+=cart[item];
+
+container.innerHTML+=`
+<div class="cart-item">
+<span>${item}</span>
+<div class="qty">
+<button onclick="changeQty('${item}',-1)">-</button>
+${cart[item]}
+<button onclick="changeQty('${item}',1)">+</button>
+<button onclick="removeItem('${item}')">❌</button>
+</div>
+</div>
+`;
+
+}
+
+document.getElementById("cartCount").innerText=count;
+
+}
+
+function changeQty(item,value){
+
+cart[item]+=value;
+
+if(cart[item]<=0){
+delete cart[item];
+}
+
+updateCart();
+
+}
+
+function removeItem(item){
+
+delete cart[item];
+updateCart();
+
+}
+
+function toggleCart(){
+
+const c=document.getElementById("cart");
+
+c.style.display=c.style.display==="block"?"none":"block";
 
 }
 
 /* COMMANDE */
 
-function order(dish){
+function sendOrder(){
 
 const table=getTable();
 
-let tableText="";
+let message="Commande :%0A";
 
-if(table){
-tableText=" - Table "+table;
+for(let item in cart){
+message+=cart[item]+" "+item+"%0A";
 }
 
-const message="Bonjour je voudrais commander : "+dish+tableText;
+if(table){
+message+="Table "+table;
+}
 
-const url="https://wa.me/2250554901363?text="+encodeURIComponent(message);
-
-window.open(url);
+window.open("https://wa.me/2250554901363?text="+message);
 
 }
 
@@ -410,46 +501,17 @@ function callServer(){
 
 const table=getTable();
 
-let tableText="";
+let message="Bonjour un serveur est demandé";
 
 if(table){
-tableText=" - Table "+table;
+message+=" - Table "+table;
 }
 
-const message="Bonjour un serveur est demandé"+tableText;
-
-const url="https://wa.me/2250554901363?text="+encodeURIComponent(message);
-
-window.open(url);
-
-}
-
-/* FILTRE CATEGORIES */
-
-function showCategory(category){
-
-const items=document.querySelectorAll(".card");
-
-items.forEach(item=>{
-
-if(category==="all"){
-item.style.display="block";
-}
-
-else if(item.classList.contains(category)){
-item.style.display="block";
-}
-
-else{
-item.style.display="none";
-}
-
-});
+window.open("https://wa.me/2250554901363?text="+encodeURIComponent(message));
 
 }
 
 </script>
 
 </body>
-
 </html>
