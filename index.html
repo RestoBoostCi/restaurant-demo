@@ -13,31 +13,64 @@
 body{
 margin:0;
 font-family:Arial;
-background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
-url("https://images.unsplash.com/photo-1555396273-367ea4eb4db5");
+color:white;
+
+background:
+linear-gradient(rgba(0,0,0,0.65),rgba(0,0,0,0.65)),
+url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4");
+
 background-size:cover;
 background-position:center;
-color:white;
+background-attachment:fixed;
 }
 
+/* HEADER */
+
 header{
+
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:15px 25px;
-background:rgba(0,0,0,0.8);
+padding:15px 30px;
+background:rgba(0,0,0,0.85);
+position:fixed;
+width:100%;
+top:0;
+z-index:1000;
+box-sizing:border-box;
+
+}
+
+header h2{
+margin:0;
+font-size:22px;
+}
+
+nav{
+display:flex;
+gap:25px;
+flex-wrap:wrap;
 }
 
 nav a{
-margin-left:20px;
 color:white;
 text-decoration:none;
 cursor:pointer;
+font-size:16px;
+font-weight:bold;
+padding:5px 8px;
 }
+
+/* PAGES */
 
 .page{
 display:none;
-padding:80px 20px;
+padding-top:130px;
+padding-left:20px;
+padding-right:20px;
+padding-bottom:60px;
+max-width:1200px;
+margin:auto;
 text-align:center;
 }
 
@@ -45,59 +78,115 @@ text-align:center;
 display:block;
 }
 
+/* ACCUEIL */
+
 .hero h1{
-font-size:40px;
+font-size:45px;
 color:#d4af37;
+margin-bottom:10px;
+}
+
+.hero p{
+font-size:20px;
+margin-bottom:25px;
 }
 
 .btn{
+
 background:#d4af37;
 color:black;
-padding:12px 25px;
-border-radius:6px;
+padding:14px 25px;
+border-radius:8px;
 font-weight:bold;
-margin-top:10px;
-display:inline-block;
 cursor:pointer;
+display:inline-block;
+margin:10px;
+
 }
 
+/* MENU */
+
 .menu-container{
+
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
 margin-top:40px;
+
 }
 
 .card{
+
 background:#111;
-border-radius:10px;
+border-radius:12px;
 overflow:hidden;
+box-shadow:0 8px 25px rgba(0,0,0,0.7);
+
 }
 
 .card img{
 width:100%;
-height:150px;
+height:180px;
 object-fit:cover;
 }
 
 .card-content{
-padding:15px;
+
+padding:20px;
+text-align:center;
+
 }
 
 .card h3{
 color:#d4af37;
+margin-bottom:10px;
 }
 
+.price{
+margin-bottom:15px;
+font-size:18px;
+}
+
+/* CONTACT */
+
+.contact-box{
+
+background:rgba(0,0,0,0.7);
+padding:40px;
+border-radius:10px;
+margin-top:30px;
+
+}
+
+/* WHATSAPP */
+
 .whatsapp{
+
 position:fixed;
 bottom:20px;
 right:20px;
 background:#25D366;
 color:white;
-font-size:25px;
-padding:15px;
+font-size:24px;
+padding:16px;
 border-radius:50%;
 text-decoration:none;
+
+}
+
+/* MOBILE */
+
+@media (max-width:768px){
+
+header{
+flex-direction:column;
+gap:10px;
+}
+
+.hero h1{
+font-size:28px;
+}
+
 }
 
 </style>
@@ -111,12 +200,15 @@ text-decoration:none;
 <h2>Le Gourmet d'Abidjan</h2>
 
 <nav>
+
 <a onclick="showPage('home')">Accueil</a>
 <a onclick="showPage('menu')">Menu</a>
 <a onclick="showPage('contact')">Contact</a>
+
 </nav>
 
 </header>
+
 
 <!-- ACCUEIL -->
 
@@ -130,13 +222,12 @@ text-decoration:none;
 Commander sur WhatsApp
 </div>
 
-<br>
-
 <div class="btn" onclick="callServer()">
 Appeler un serveur
 </div>
 
 </section>
+
 
 <!-- MENU -->
 
@@ -154,7 +245,7 @@ Appeler un serveur
 
 <h3>Burger Gourmet</h3>
 
-<p>6500 FCFA</p>
+<div class="price">6500 FCFA</div>
 
 <div class="btn" onclick="order('Burger Gourmet')">
 Commander
@@ -172,7 +263,7 @@ Commander
 
 <h3>Entrecôte grillée</h3>
 
-<p>9000 FCFA</p>
+<div class="price">9000 FCFA</div>
 
 <div class="btn" onclick="order('Entrecôte grillée')">
 Commander
@@ -190,7 +281,7 @@ Commander
 
 <h3>Filet de poisson</h3>
 
-<p>8000 FCFA</p>
+<div class="price">8000 FCFA</div>
 
 <div class="btn" onclick="order('Filet de poisson')">
 Commander
@@ -208,7 +299,7 @@ Commander
 
 <h3>Cheesecake</h3>
 
-<p>3500 FCFA</p>
+<div class="price">3500 FCFA</div>
 
 <div class="btn" onclick="order('Cheesecake')">
 Commander
@@ -222,11 +313,14 @@ Commander
 
 </section>
 
+
 <!-- CONTACT -->
 
 <section id="contact" class="page">
 
-<h2>Contact</h2>
+<h2>Contact du restaurant</h2>
+
+<div class="contact-box">
 
 <p>📍 Abidjan</p>
 
@@ -234,15 +328,15 @@ Commander
 
 <p>⏰ Ouvert tous les jours : 12h - 23h</p>
 
-<div class="btn" onclick="order('Réservation')">
-Réserver une table
+<div class="btn" onclick="callServer()">Appeler un serveur</div>
+
 </div>
 
 </section>
 
-<a href="https://wa.me/2250554901363" class="whatsapp">
-💬
-</a>
+
+<a href="https://wa.me/2250554901363" class="whatsapp">💬</a>
+
 
 <script>
 
@@ -263,7 +357,7 @@ return params.get("table");
 
 }
 
-/* ouvrir menu automatiquement si QR code */
+/* ouvrir menu si QR code */
 
 window.onload=function(){
 
