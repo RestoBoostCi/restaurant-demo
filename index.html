@@ -214,6 +214,8 @@ font-size:28px;
 
 <section id="home" class="page active hero">
 
+    <h3 id="tableNumber"></h3>
+
 <h1>Restaurant Chic à Abidjan</h1>
 
 <p>Burgers gourmets • Grillades premium</p>
@@ -357,14 +359,19 @@ return params.get("table");
 
 }
 
-/* ouvrir menu si QR code */
-
 window.onload=function(){
 
 const table=getTable();
 
 if(table){
+
 showPage("menu");
+
+/* afficher le numéro de table */
+
+document.getElementById("tableNumber").innerText =
+"Bienvenue - Table " + table;
+
 }
 
 }
