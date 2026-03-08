@@ -27,23 +27,20 @@ background-attachment:fixed;
 /* HEADER */
 
 header{
-
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:15px 30px;
+padding:20px 40px;
 background:rgba(0,0,0,0.85);
 position:fixed;
 width:100%;
 top:0;
 z-index:1000;
 box-sizing:border-box;
-
 }
 
 header h2{
 margin:0;
-font-size:22px;
 }
 
 nav{
@@ -55,19 +52,15 @@ flex-wrap:wrap;
 nav a{
 color:white;
 text-decoration:none;
-cursor:pointer;
-font-size:16px;
 font-weight:bold;
-padding:5px 8px;
+cursor:pointer;
 }
 
 /* PAGES */
 
 .page{
 display:none;
-padding-top:130px;
-padding-left:20px;
-padding-right:20px;
+padding-top:120px;
 padding-bottom:60px;
 max-width:1200px;
 margin:auto;
@@ -81,9 +74,8 @@ display:block;
 /* ACCUEIL */
 
 .hero h1{
-font-size:45px;
+font-size:42px;
 color:#d4af37;
-margin-bottom:10px;
 }
 
 .hero p{
@@ -91,8 +83,9 @@ font-size:20px;
 margin-bottom:25px;
 }
 
-.btn{
+/* BOUTONS */
 
+.btn{
 background:#d4af37;
 color:black;
 padding:14px 25px;
@@ -101,27 +94,49 @@ font-weight:bold;
 cursor:pointer;
 display:inline-block;
 margin:10px;
+}
 
+/* TABLE */
+
+#tableNumber{
+color:#d4af37;
+font-size:22px;
+margin-bottom:20px;
+}
+
+/* CATEGORIES */
+
+.categories{
+margin-top:20px;
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+justify-content:center;
+}
+
+.categories button{
+background:#d4af37;
+border:none;
+padding:10px 18px;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
 }
 
 /* MENU */
 
 .menu-container{
-
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:30px;
 margin-top:40px;
-
 }
 
 .card{
-
 background:#111;
 border-radius:12px;
 overflow:hidden;
 box-shadow:0 8px 25px rgba(0,0,0,0.7);
-
 }
 
 .card img{
@@ -131,37 +146,28 @@ object-fit:cover;
 }
 
 .card-content{
-
 padding:20px;
-text-align:center;
-
 }
 
 .card h3{
 color:#d4af37;
-margin-bottom:10px;
 }
 
 .price{
 margin-bottom:15px;
-font-size:18px;
 }
 
 /* CONTACT */
 
 .contact-box{
-
 background:rgba(0,0,0,0.7);
 padding:40px;
 border-radius:10px;
-margin-top:30px;
-
 }
 
 /* WHATSAPP */
 
 .whatsapp{
-
 position:fixed;
 bottom:20px;
 right:20px;
@@ -171,7 +177,6 @@ font-size:24px;
 padding:16px;
 border-radius:50%;
 text-decoration:none;
-
 }
 
 /* MOBILE */
@@ -209,12 +214,11 @@ font-size:28px;
 
 </header>
 
-
 <!-- ACCUEIL -->
 
 <section id="home" class="page active hero">
 
-    <h3 id="tableNumber"></h3>
+<h3 id="tableNumber"></h3>
 
 <h1>Restaurant Chic à Abidjan</h1>
 
@@ -230,16 +234,24 @@ Appeler un serveur
 
 </section>
 
-
 <!-- MENU -->
 
 <section id="menu" class="page">
 
 <h2>Notre Menu</h2>
 
+<div class="categories">
+
+<button onclick="showCategory('all')">Tout</button>
+<button onclick="showCategory('burger')">Burgers</button>
+<button onclick="showCategory('grill')">Grillades</button>
+<button onclick="showCategory('dessert')">Desserts</button>
+
+</div>
+
 <div class="menu-container">
 
-<div class="card">
+<div class="card burger">
 
 <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd">
 
@@ -257,7 +269,7 @@ Commander
 
 </div>
 
-<div class="card">
+<div class="card grill">
 
 <img src="https://images.unsplash.com/photo-1544025162-d76694265947">
 
@@ -275,7 +287,7 @@ Commander
 
 </div>
 
-<div class="card">
+<div class="card grill">
 
 <img src="https://images.unsplash.com/photo-1559847844-5315695dadae">
 
@@ -293,7 +305,7 @@ Commander
 
 </div>
 
-<div class="card">
+<div class="card dessert">
 
 <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b">
 
@@ -315,7 +327,6 @@ Commander
 
 </section>
 
-
 <!-- CONTACT -->
 
 <section id="contact" class="page">
@@ -336,9 +347,7 @@ Commander
 
 </section>
 
-
 <a href="https://wa.me/2250554901363" class="whatsapp">💬</a>
-
 
 <script>
 
@@ -352,9 +361,11 @@ document.getElementById(page).classList.add("active");
 
 }
 
+/* TABLE */
+
 function getTable(){
 
-const params = new URLSearchParams(window.location.search);
+const params=new URLSearchParams(window.location.search);
 return params.get("table");
 
 }
@@ -367,14 +378,13 @@ if(table){
 
 showPage("menu");
 
-/* afficher le numéro de table */
-
-document.getElementById("tableNumber").innerText =
-"Bienvenue - Table " + table;
+document.getElementById("tableNumber").innerText="Bienvenue - Table "+table;
 
 }
 
 }
+
+/* COMMANDE */
 
 function order(dish){
 
@@ -383,16 +393,18 @@ const table=getTable();
 let tableText="";
 
 if(table){
-tableText=` - Table ${table}`;
+tableText=" - Table "+table;
 }
 
-const message=`Bonjour je voudrais commander : ${dish}${tableText}`;
+const message="Bonjour je voudrais commander : "+dish+tableText;
 
-const url=`https://wa.me/2250554901363?text=${encodeURIComponent(message)}`;
+const url="https://wa.me/2250554901363?text="+encodeURIComponent(message);
 
 window.open(url);
 
 }
+
+/* SERVEUR */
 
 function callServer(){
 
@@ -401,14 +413,38 @@ const table=getTable();
 let tableText="";
 
 if(table){
-tableText=` - Table ${table}`;
+tableText=" - Table "+table;
 }
 
-const message=`Bonjour un serveur est demandé${tableText}`;
+const message="Bonjour un serveur est demandé"+tableText;
 
-const url=`https://wa.me/2250554901363?text=${encodeURIComponent(message)}`;
+const url="https://wa.me/2250554901363?text="+encodeURIComponent(message);
 
 window.open(url);
+
+}
+
+/* FILTRE CATEGORIES */
+
+function showCategory(category){
+
+const items=document.querySelectorAll(".card");
+
+items.forEach(item=>{
+
+if(category==="all"){
+item.style.display="block";
+}
+
+else if(item.classList.contains(category)){
+item.style.display="block";
+}
+
+else{
+item.style.display="none";
+}
+
+});
 
 }
 
