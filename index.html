@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Le Gourmet d'Abidjan</title>
+
+<link rel="manifest" href="manifest.json">
+
+<style>
+
+body{
+margin:0;
+font-family:Georgia, serif;
+background:linear-gradient(rgba(0,0,0,0.65),rgba(0,0,0,0.65)),
+url("https://images.unsplash.com/photo-1555396273-367ea4eb4db5");
+background-size:cover;
+background-position:center;
+color:white;
+}
+
+/* HEADER */
+
+header{
+position:fixed;
+top:0;
+width:100%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 20px;
+background:rgba(0,0,0,0.9);
+z-index:1000;
+box-sizing:border-box;
+}
+
+.logo{
+font-size:22px;
+color:#d4af37;
+font-weight:bold;
+}
+
+nav{
+display:flex;
+gap:20px;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+font-size:16px;
+cursor:pointer;
+}
+
+/* PAGE */
+
+.page{
+display:none;
+min-height:100vh;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+padding-top:120px;
+padding-left:20px;
+padding-right:20px;
+}
+
+.page.active{
+display:flex;
+}
+
+/* HERO */
+
+.hero h1{
+font-size:40px;
+color:#d4af37;
+}
+
+.hero p{
+font-size:18px;
+margin-bottom:20px;
+}
+
+/* BUTTON */
+
+.btn{
+background:#d4af37;
+color:black;
+padding:12px 25px;
+text-decoration:none;
+border-radius:6px;
+font-weight:bold;
+margin-top:10px;
+display:inline-block;
+cursor:pointer;
+}
+
+/* MENU PANEL */
+
+.menu-panel{
+background:rgba(0,0,0,0.85);
+padding:20px;
+border-radius:15px;
+max-width:900px;
+width:100%;
+}
+
+.menu-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+gap:20px;
+margin-top:20px;
+}
+
+/* FOOD CARD */
+
+.card{
+background:#111;
+border-radius:12px;
+overflow:hidden;
+text-align:center;
+box-shadow:0 10px 20px rgba(0,0,0,0.6);
+transition:0.3s;
+}
+
+.card:hover{
+transform:scale(1.05);
+}
+
+.card img{
+width:100%;
+height:120px;
+object-fit:cover;
+}
+
+.card-content{
+padding:10px;
+}
+
+.card h3{
+color:#d4af37;
+margin:10px 0;
+font-size:17px;
+}
+
+/* WHATSAPP */
+
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+color:white;
+font-size:26px;
+padding:15px;
+border-radius:50%;
+text-decoration:none;
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+.hero h1{
+font-size:30px;
+}
+
+nav a{
+font-size:14px;
+}
+
+.logo{
+font-size:18px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">Le Gourmet d'Abidjan</div>
+
+<nav>
+
+<a onclick="showPage('home')">Accueil</a>
+<a onclick="showPage('menu')">Menu</a>
+<a onclick="showPage('contact')">Contact</a>
+
+</nav>
+
+</header>
+
+<!-- ACCUEIL -->
+
+<section id="home" class="page active hero">
+
+<h1>Restaurant Chic à Abidjan</h1>
+
+<p>Burgers gourmets • Grillades premium</p>
+
+<a class="btn" onclick="order('Commande générale')">
+Commander sur WhatsApp
+</a>
+
+<br>
+
+<a class="btn" onclick="callServer()">
+Appeler un serveur
+</a>
+
+</section>
+
+<!-- MENU -->
+
+<section id="menu" class="page">
+
+<div class="menu-panel">
+
+<h2 style="color:#d4af37">Notre Menu</h2>
+
+<div class="menu-container">
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd">
+
+<div class="card-content">
+
+<h3>Burger Gourmet</h3>
+
+<p>6500 FCFA</p>
+
+<a class="btn" onclick="order('Burger Gourmet')">Commander</a>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1544025162-d76694265947">
+
+<div class="card-content">
+
+<h3>Entrecôte grillée</h3>
+
+<p>9000 FCFA</p>
+
+<a class="btn" onclick="order('Entrecôte grillée')">Commander</a>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1559847844-5315695dadae">
+
+<div class="card-content">
+
+<h3>Filet de poisson</h3>
+
+<p>8000 FCFA</p>
+
+<a class="btn" onclick="order('Filet de poisson')">Commander</a>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1551024601-bec78aea704b">
+
+<div class="card-content">
+
+<h3>Cheesecake</h3>
+
+<p>3500 FCFA</p>
+
+<a class="btn" onclick="order('Cheesecake')">Commander</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact" class="page">
+
+<h2 style="color:#d4af37">Contact</h2>
+
+<p>📍 Abidjan</p>
+
+<p>📱 WhatsApp : 0554901363</p>
+
+<p>⏰ Ouvert tous les jours : 12h - 23h</p>
+
+<a class="btn" href="https://wa.me/2250554901363">
+Écrire sur WhatsApp
+</a>
+
+</section>
+
+<a href="https://wa.me/2250554901363" class="whatsapp">💬</a>
+
+<script>
+
+function showPage(page){
+
+document.querySelectorAll(".page").forEach(p=>{
+p.classList.remove("active");
+});
+
+document.getElementById(page).classList.add("active");
+
+}
+
+function getTable(){
+
+const params = new URLSearchParams(window.location.search);
+return params.get("table") || "Table inconnue";
+
+}
+
+function order(dish){
+
+const table = getTable();
+
+const message = `Bonjour je voudrais commander : ${dish} - ${table}`;
+
+const url = `https://wa.me/2250554901363?text=${encodeURIComponent(message)}`;
+
+window.open(url);
+
+}
+
+function callServer(){
+
+const table = getTable();
+
+const message = `Bonjour un serveur est demandé - ${table}`;
+
+const url = `https://wa.me/2250554901363?text=${encodeURIComponent(message)}`;
+
+window.open(url);
+
+}
+
+</script>
+
+</body>
+</html>
